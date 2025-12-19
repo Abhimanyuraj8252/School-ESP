@@ -27,7 +27,7 @@ async function getSupabase() {
 }
 
 // Fetch students for a specific class (to populate the list)
-export async function getStudentsByClass(className: string) {
+export async function getStudentsByClass(className: string, section?: string) {
     const supabase = await getSupabase()
 
     // Assuming 'students' table has 'class' column. 
@@ -36,14 +36,37 @@ export async function getStudentsByClass(className: string) {
     // Based on previous files, likely 'students' table or 'users' with role student.
 
     // Let's try 'students' table first as per typical schema
-    const { data, error } = await supabase
+    let query = supabase
         .from('students')
         .select('*')
         .eq('class', className)
-        .order('roll_no', { ascending: true })
+    
+    if (section) {
+        query = query.eq('section', section)
+    }
+    
+    const { data, error } = await query.order('roll_no', { ascending: true })
 
     if (error) {
         console.error("Error fetching students:", error)
+        return []
+    }
+    return data
+}
+
+// Get teacher's classes
+export async function getTeacherClasses() {
+    const supabase = await getSupabase()
+
+    // Assuming teachers table or users with role teacher has assigned classes
+    // This is a placeholder - adjust based on your actual schema
+    const { data, error } = await supabase
+        .from('teacher_classes')
+        .select('id, class_name, section')
+        .order('class_name', { ascending: true })
+
+    if (error) {
+        console.error("Error fetching teacher classes:", error)
         return []
     }
     return data

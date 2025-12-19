@@ -7,7 +7,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Loader2, Lock } from "lucide-react"
-import { useToast } from "@/components/ui/use-toast" // Assuming shadcn toast exists, or I'll use simple alert
+import { useToast } from "@/hooks/use-toast"
 
 export default function SecuritySettingsPage() {
     const [password, setPassword] = useState("")

@@ -132,7 +132,7 @@ export default function FeeCollectionPage() {
                             </Button>
                         </div>
 
-                        <div className="space-y-2 max-h-[400px] overflow-y-auto">
+                        <div className="space-y-2 max-h-100 overflow-y-auto">
                             {searchResults.map((student) => (
                                 <div
                                     key={student.id}
@@ -167,8 +167,8 @@ export default function FeeCollectionPage() {
                                         <TableHeader>
                                             <TableRow className="bg-slate-50">
                                                 <TableHead>Fee Description</TableHead>
-                                                <TableHead className="w-[150px]">Amount (₹)</TableHead>
-                                                <TableHead className="w-[50px]"></TableHead>
+                                                <TableHead className="w-37.5">Amount (₹)</TableHead>
+                                                <TableHead className="w-12.5"></TableHead>
                                             </TableRow>
                                         </TableHeader>
                                         <TableBody>
@@ -241,7 +241,7 @@ export default function FeeCollectionPage() {
                                 </Button>
                             </div>
                         ) : (
-                            <div className="flex flex-col items-center justify-center h-[300px] bg-slate-50 border-2 border-dashed rounded-lg text-slate-400">
+                            <div className="flex flex-col items-center justify-center h-75 bg-slate-50 border-2 border-dashed rounded-lg text-slate-400">
                                 <Search className="h-10 w-10 mb-2 opacity-50" />
                                 <p>Search and select a student to start.</p>
                             </div>

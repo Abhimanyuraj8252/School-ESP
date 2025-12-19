@@ -2,14 +2,14 @@
 
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { useEffect, useState } from "react"
-import { getTeacherClasses } from "@/app/actions/teacher"
+import { getStudentsByClass, getTeacherClasses } from "@/app/actions/teacher"
 import { useRouter, useSearchParams } from "next/navigation"
 
 interface TeacherClass {
     id: string
     class_name: string
     section: string
-    subject: string | null
+    subject?: string | null
 }
 
 export function ClassSelector() {
@@ -35,7 +35,7 @@ export function ClassSelector() {
 
     return (
         <Select onValueChange={handleValueChange} value={currentData}>
-            <SelectTrigger className="w-[200px]">
+            <SelectTrigger className="w-50">
                 <SelectValue placeholder="Select Class" />
             </SelectTrigger>
             <SelectContent>

@@ -1,7 +1,7 @@
 'use client'
 
 import { saveExamMarks } from "@/app/actions/exams"
-import { getStudentsForClass } from "@/app/actions/teacher"
+import { getStudentsByClass } from "@/app/actions/teacher"
 import { AnswerSheetUpload } from "@/components/teacher/AnswerSheetUpload"
 import { ClassSelector } from "@/components/teacher/ClassSelector"
 import { Suspense } from "react"
@@ -43,7 +43,7 @@ function ExamEntryContent() {
     useEffect(() => {
         if (className && section) {
             setLoading(true)
-            getStudentsForClass(className, section).then(data => {
+            getStudentsByClass(className, section).then(data => {
                 setStudents(data)
                 setLoading(false)
             })
@@ -93,7 +93,7 @@ function ExamEntryContent() {
                         placeholder="e.g. Mathematics"
                         value={subject}
                         onChange={e => setSubject(e.target.value)}
-                        className="w-[200px]"
+                        className="w-50"
                     />
                 </div>
                 <div>
@@ -102,7 +102,7 @@ function ExamEntryContent() {
                         type="number"
                         value={maxMarks}
                         onChange={e => setMaxMarks(e.target.value)}
-                        className="w-[100px]"
+                        className="w-25"
                     />
                 </div>
             </div>

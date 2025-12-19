@@ -1,9 +1,10 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { getStudentHomework } from "@/app/actions/student"
+import { getStudentHomework, getStudentProfile } from "@/app/actions/student"
 import { Calendar } from "lucide-react"
 
 export default async function HomeworkPage() {
-    const homeworkList = await getStudentHomework()
+    const student = await getStudentProfile()
+    const homeworkList = await getStudentHomework(student)
 
     return (
         <div className="space-y-6">

@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import crypto from 'crypto'
 import { createClient } from '@/utils/supabase/server'
-import { generateReceiptPDF } from '@/utils/receiptGenerator'
+import { generateReceipt } from '@/utils/receiptGenerator'
 
 export async function POST(request: Request) {
     const { orderCreationId, razorpayPaymentId, razorpaySignature, amount, studentId, feeDescription } = await request.json()
@@ -19,7 +19,19 @@ export async function POST(request: Request) {
         const supabase = await createClient()
 
         // 1. Generate PDF
-        const pdfBuffer = await generateReceiptPDF(razorpayPaymentId, orderCreationId, amount, studentId, feeDescription)
+        const transaction = { 
+            id: razorpayPaymentId, 
+            order_id: orderCreationId, 
+            amount, 
+            description: feeDescription 
+        }
+        const student = { 
+            id: studentId, 
+            name: "Student Name", // You may want to fetch actual student details
+            class: "Class", 
+            roll: "Roll" 
+        }
+        const pdfBuffer = await generateReceipt(transaction, student)
 
         // 2. Upload to Supabase Storage
         const fileName = `receipts/${studentId}-${razorpayPaymentId}.pdf`
