@@ -1,5 +1,9 @@
 [build]
   command = "npm run build"
 
+[build.environment]
+  # Exclude README and example files from secrets scanning
+  SECRETS_SCAN_OMIT_PATHS = "README.md,.env.example"
+
 [[plugins]]
   package = "@netlify/plugin-nextjs"
