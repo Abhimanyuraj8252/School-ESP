@@ -6,7 +6,7 @@ import { BarChart, BookOpen, Calendar, Clock, Download, FileText, GraduationCap,
 import Link from "next/link"
 import { motion } from "framer-motion"
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet"
-import { downloadReceiptPDF } from "@/utils/receiptGenerator"
+import { downloadReceipt } from "@/utils/receiptGenerator"
 
 export default function DashboardPage() {
     const notices = [
@@ -127,7 +127,7 @@ export default function DashboardPage() {
         const amount = parseInt(cleanAmount) || 0
 
         // Use the utility to generate and save PDF
-        downloadReceiptPDF(id, "MOCK-ORDER" + id, amount, "STU-10A-001", description)
+        downloadReceipt(id, "MOCK-ORDER" + id, amount, "STU-10A-001", description)
     }
 
     return (
