@@ -127,7 +127,9 @@ export default function DashboardPage() {
         const amount = parseInt(cleanAmount) || 0
 
         // Use the utility to generate and save PDF
-        downloadReceipt(id, "MOCK-ORDER" + id, amount, "STU-10A-001", description)
+        const transaction = { id, order_id: "MOCK-ORDER" + id, amount, description }
+        const student = { id: "STU-10A-001", name: "Student Name", class: "10-A", roll: "001" }
+        downloadReceipt(transaction, student)
     }
 
     return (
@@ -152,7 +154,7 @@ export default function DashboardPage() {
                 {/* Left Column: Data & Fees */}
                 <div className="lg:col-span-2 space-y-6">
                     {/* Result Card */}
-                    <Card className="overflow-hidden border-none shadow-md bg-gradient-to-br from-primary to-primary-light text-white">
+                    <Card className="overflow-hidden border-none shadow-md bg-linear-to-br from-primary to-primary-light text-white">
                         <CardHeader>
                             <CardTitle className="flex justify-between items-center">
                                 <span>Latest Result</span>
@@ -269,7 +271,7 @@ export default function DashboardPage() {
                                 {notices.map((notice, idx) => (
                                     <div key={notice.id} className="relative">
                                         {/* Timeline Dot */}
-                                        <div className={`absolute -left-[31px] top-1 w-4 h-4 rounded-full border-2 border-white 
+                                        <div className={`absolute -left-7.75 top-1 w-4 h-4 rounded-full border-2 border-white 
                                                 ${notice.type === 'Exam' ? 'bg-red-400' :
                                                 notice.type === 'Event' ? 'bg-green-400' : 'bg-blue-400'
                                             }`}
